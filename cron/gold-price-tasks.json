@@ -1,0 +1,40 @@
+{
+  "name": "黄金T+D价格监控",
+  "description": "黄金T+D定时推送、价格预警和历史记录",
+  "tasks": [
+    {
+      "name": "每日价格推送",
+      "description": "每天上午10点和下午5点推送黄金T+D价格",
+      "schedule": "0 10,17 * * *",
+      "command": "node /home/openclaw/.openclaw/workspace/skills/gold-price/scripts/gold-price-daily-push.js",
+      "channel": "openclaw-weixin",
+      "delivery": {
+        "mode": "announce",
+        "channel": "openclaw-weixin",
+        "to": "o9cq80xIdG_LfgjB7fS7zBglq0EI@im.wechat"
+      }
+    },
+    {
+      "name": "价格预警检查",
+      "description": "每10分钟检查价格，低于550或高于750时提醒（每天只提醒一次）",
+      "schedule": "*/10 * * * *",
+      "command": "node /home/openclaw/.openclaw/workspace/skills/gold-price/scripts/gold-price-alert.js",
+      "channel": "openclaw-weixin",
+      "delivery": {
+        "mode": "announce",
+        "channel": "openclaw-weixin",
+        "to": "o9cq80xIdG_LfgjB7fS7zBglq0EI@im.wechat"
+      }
+    },
+    {
+      "name": "历史价格记录",
+      "description": "每半小时记录一次价格到CSV文件",
+      "schedule": "*/30 * * * *",
+      "command": "node /home/openclaw/.openclaw/workspace/skills/gold-price/scripts/gold-price-history.js",
+      "channel": "openclaw-weixin",
+      "delivery": {
+        "mode": "silent"
+      }
+    }
+  ]
+}

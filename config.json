@@ -1,0 +1,38 @@
+{
+  "name": "黄金T+D价格监控",
+  "version": "1.1.0",
+  "priceCode": "JO_9753",
+  "priceName": "黄金T+D",
+  "priceUnit": "元/克",
+  "history": {
+    "enabled": true,
+    "intervalMinutes": 45,
+    "recordOnChangeOnly": true,
+    "priceChangeThreshold": 0.01
+  },
+  "alert": {
+    "enabled": true,
+    "intervalMinutes": 10,
+    "lowThreshold": 950,
+    "highThreshold": 1150,
+    "oncePerDay": true
+  },
+  "push": {
+    "enabled": true,
+    "times": [
+      "10:00",
+      "12:00",
+      "17:00"
+    ],
+    "targets": [
+      {
+        "name": "主微信",
+        "channel": "openclaw-weixin",
+        "account": "bd6316d4cefd-im-bot",
+        "to": "o9cq80xIdG_LfgjB7fS7zBglq0EI@im.wechat",
+        "enabled": true
+      }
+    ]
+  },
+  "dataRetentionDays": -1
+}
